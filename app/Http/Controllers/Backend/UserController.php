@@ -25,9 +25,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $article= Article::all();
+        
         $users = User::all();
-        return view('backend.user.user-index')->with(['users' => $users,'currentuser' => $this->authorized()]);
+        return view('backend.user.user-index')->with(['users' => $users, 'currentuser' => $this->authorized()]);
     }
 
     /**
