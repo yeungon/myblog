@@ -18,7 +18,7 @@
 
                     Hi {{ Auth::user()->name }}, you are logged in!
                     
-                    <category-component :username = {{ Auth::user()->name }}></category-component>
+                    <home-component :username = {{ Auth::user()->name }}></home-component>
                     
                 </div>
             </div>

@@ -6,7 +6,7 @@
                     <div class="card-header">Welcoming</div>
 
                     <div class="card-body">
-                        Welcome to the new blog. We are designing a new dashboard with much better experience! </a>. 
+                        Welcome to the new blog. We are designing a new dashboard with much better experience at <a href="/admin">here! </a>. 
                     </div>
                 </div>
             </div>
