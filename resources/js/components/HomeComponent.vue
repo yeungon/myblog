@@ -19,6 +19,14 @@
         mounted() {
             console.log('Component mounted.')
         },
+
+        data: function(){
+            return {
+                name: "Vuong",
+            }
+
+        }
+
         
     }
 </script>

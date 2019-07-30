@@ -35,13 +35,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/', 'Backend\AdminController@index')->name('admin.index');
     
     //User 
-    Route::get('user', 'Backend\UserController@index')->name('admin.user.index');
-    Route::get('user/create', 'Backend\UserController@create')->name('admin.user.create');
-    Route::post('user/create', 'Backend\UserController@store')->name('admin.user.store');
-    Route::get('user/{id}', 'Backend\UserController@show')->name('admin.user.show');
-    Route::get('user/edit/{id}', 'Backend\UserController@edit')->name('admin.user.edit');
-    Route::put('user/edit/{id}', 'Backend\UserController@update')->name('admin.user.update');
-    Route::delete('user/delete/{id}', 'Backend\UserController@destroy')->name('admin.user.destroy');
+    Route::get('user', 'Backend\UserController@index')->name('admin.user.index')->middleware('isadmin');;
+    Route::get('user/create', 'Backend\UserController@create')->name('admin.user.create')->middleware('isadmin');
+    Route::post('user/create', 'Backend\UserController@store')->name('admin.user.store')->middleware('isadmin');;
+    Route::get('user/{id}', 'Backend\UserController@show')->name('admin.user.show')->middleware('isadmin');;
+    Route::get('user/edit/{id}', 'Backend\UserController@edit')->name('admin.user.edit')->middleware('isadmin');;
+    Route::put('user/edit/{id}', 'Backend\UserController@update')->name('admin.user.update')->middleware('isadmin');;
+    Route::delete('user/delete/{id}', 'Backend\UserController@destroy')->name('admin.user.destroy')->middleware('isadmin');;
 
     // Profile
     Route::get('profile/{id}', 'Backend\ProfileController@show')->name('admin.profile.show');
@@ -50,13 +50,13 @@ Route::prefix('admin')->group(function () {
     Route::delete('profile/delete/{id}', 'Backend\ProfileController@destroy')->name('admin.profile.destroy');
 
     // Category
-    Route::get('category', 'Backend\CategoryController@index')->name('admin.category.index');
-    Route::get('category/create', 'Backend\CategoryController@create')->name('admin.category.create');
-    Route::post('category/create', 'Backend\CategoryController@store')->name('admin.category.store');
-    Route::get('category/{id}', 'Backend\CategoryController@show')->name('admin.category.show');
-    Route::get('category/edit/{id}', 'Backend\CategoryController@edit')->name('admin.category.edit');
-    Route::put('category/edit/{id}', 'Backend\CategoryController@update')->name('admin.category.update');
-    Route::delete('category/delete/{id}', 'Backend\CategoryController@destroy')->name('admin.category.destroy');
+    Route::get('category', 'Backend\CategoryController@index')->name('admin.category.index')->middleware('isadmin');;
+    Route::get('category/create', 'Backend\CategoryController@create')->name('admin.category.create')->middleware('isadmin');;
+    Route::post('category/create', 'Backend\CategoryController@store')->name('admin.category.store')->middleware('isadmin');;
+    Route::get('category/{id}', 'Backend\CategoryController@show')->name('admin.category.show')->middleware('isadmin');;
+    Route::get('category/edit/{id}', 'Backend\CategoryController@edit')->name('admin.category.edit')->middleware('isadmin');;
+    Route::put('category/edit/{id}', 'Backend\CategoryController@update')->name('admin.category.update')->middleware('isadmin');;
+    Route::delete('category/delete/{id}', 'Backend\CategoryController@destroy')->name('admin.category.destroy')->middleware('isadmin');;
 
     // Article
     Route::get('article', 'Backend\ArticleController@index')->name('admin.article.index');

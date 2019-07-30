@@ -86,31 +86,45 @@
 
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                
-                <li class="nav-item">
-                  <a href="{{Route('homepage')}}" class="nav-link"><i class="fe fe-globe"></i> Home</a>
-                  </li>
 
+                @if($currentuser->is_admin)
                   <li class="nav-item">
-                    <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{Route('admin.user.index')}}" class="nav-link" ><i class="fe fe-users"></i> Users</a>                    
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="{{Route('admin.category.index')}}" class="nav-link"><i class="fe fe-calendar"></i> Categories</a>                    
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="{{Route('admin.article.index')}}" class="nav-link" ><i class="fe fe-file"></i> Articles</a>                   
-                  </li>    
-                  
-                  <li class="nav-item dropdown">
-                    <a href="{{Route('admin.article.create')}}" class="nav-link"><i class="fe fe-send"></i> Write</a>                    
-                  </li>                 
+                    <a href="{{Route('homepage')}}" class="nav-link"><i class="fe fe-globe"></i> Home</a>
+                    </li>
 
-                  <li class="nav-item dropdown">
-                  <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
-                  </li>                 
+                    <li class="nav-item">
+                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{Route('admin.user.index')}}" class="nav-link" ><i class="fe fe-users"></i> Users</a>                    
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="{{Route('admin.category.index')}}" class="nav-link"><i class="fe fe-calendar"></i> Categories</a>                    
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="{{Route('admin.article.index')}}" class="nav-link" ><i class="fe fe-file"></i> Articles</a>                   
+                    </li>    
+                    
+                    <li class="nav-item dropdown">
+                      <a href="{{Route('admin.article.create')}}" class="nav-link"><i class="fe fe-send"></i> Write</a>                    
+                    </li>                 
+
+                    <li class="nav-item dropdown">
+                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
+                    </li>                                
+                @else
+                  <li class="nav-item">
+                    <a href="{{Route('homepage')}}" class="nav-link"><i class="fe fe-globe"></i> Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
+                    </li>
+
+                @endif                                                 
 
                 </ul>
               </div>
