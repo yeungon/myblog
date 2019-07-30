@@ -65,30 +65,26 @@
                         </div>
                       </div>    
 
-
                       <div class="form-group">
                         <div class="row align-items-center">
                           <label class="col-sm-2">Role:</label>
                           <div class="col-sm-10">
-
-                                @if($currentuser->is_admin)
-                                <select name="role" id="select-role" class="form-control custom-select @error('role') is-invalid @enderror" value="{{ old('message') }}"  required>
-                                  <option value="" disabled selected>Please select the role</option>
-                                  <option value="1">Admin</option>
-                                  <option value="0">User</option>
-                                  </select>
-                                @else
-                                  <p value="0" disabled>User (only admin can change this role)</strong></p>
-                                @endif
-                                                                
-                                @error('role')
-                                    <div class="alert alert-danger">{{ $message }}</div>                                 
-                                @enderror                                                                                                
-                                                        
+                            @if($currentuser->is_admin)
+                            <select name="role" id="select-role" class="form-control custom-select @error('role') is-invalid @enderror" value="{{ old('message') }}"  required>
+                              <option value="" disabled selected>Please select the role</option>
+                              <option value="1">Admin</option>
+                              <option value="0">User</option>
+                              </select>
+                            @else
+                              <p value="0" disabled>User (only admin can change this role)</strong></p>
+                            @endif
+                                                            
+                            @error('role')
+                                <div class="alert alert-danger">{{ $message }}</div>                                 
+                            @enderror                                                                                                
                           </div>
                         </div>
                       </div>    
-
                       
                       <div class="btn-list mt-4 text-right">                    
                         <span><a href="{{Route('admin.user.index')}}"><button type="button" class="btn btn-secondary btn-space">Cancel</button> </a>

@@ -92,8 +92,16 @@ class ProfileController extends Controller
         }
    
         $user = User::find($id);
+
         $user->name = trim($request->name);
+
         $user->is_admin      = $request->role;
+        // Given that the registered cannot change her/his role, this input might be null. It cannot be null in database, then here we go.
+        if($user->is_admin === null){
+            
+            $user->is_admin = 0;
+        }
+
         $user->email         = $request->email;
 
         if($passwordchange === true){
