@@ -43,6 +43,12 @@ Route::prefix('admin')->group(function () {
     Route::put('user/edit/{id}', 'Backend\UserController@update')->name('admin.user.update');
     Route::delete('user/delete/{id}', 'Backend\UserController@destroy')->name('admin.user.destroy');
 
+    // Profile
+    Route::get('profile/{id}', 'Backend\ProfileController@show')->name('admin.profile.show');
+    Route::get('profile/edit/{id}', 'Backend\ProfileController@edit')->name('admin.profile.edit');
+    Route::put('profile/edit/{id}', 'Backend\ProfileController@update')->name('admin.profile.update');
+    Route::delete('profile/delete/{id}', 'Backend\ProfileController@destroy')->name('admin.profile.destroy');
+
     // Category
     Route::get('category', 'Backend\CategoryController@index')->name('admin.category.index');
     Route::get('category/create', 'Backend\CategoryController@create')->name('admin.category.create');

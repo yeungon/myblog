@@ -57,7 +57,7 @@
                     </span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}">
                       <i class="dropdown-icon fe fe-user"></i> Profile
                     </a>                    
                     <a class="dropdown-item" href="{{Route('logoutsystem')}}">
@@ -95,7 +95,7 @@
                     <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{Route('admin.user.index')}}" class="nav-link" ><i class="fe fe-box"></i> Users</a>                    
+                    <a href="{{Route('admin.user.index')}}" class="nav-link" ><i class="fe fe-users"></i> Users</a>                    
                   </li>
                   <li class="nav-item dropdown">
                     <a href="{{Route('admin.category.index')}}" class="nav-link"><i class="fe fe-calendar"></i> Categories</a>                    
@@ -109,7 +109,7 @@
                   </li>                 
 
                   <li class="nav-item dropdown">
-                             
+                  <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
                   </li>                 
 
                 </ul>

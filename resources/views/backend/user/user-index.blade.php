@@ -26,7 +26,8 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Registerd on</th>                                
+                                <th scope="col">Registerd on</th>
+                                <th scope="col">Article written</th>                                
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                                 </tr>
@@ -45,6 +46,7 @@
                                 <td><span>{!!$user->is_admin ? "Admin": "Normal user"!!}</span></td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>                                
+                                <td>{{count($user->getArticle)}}</td>
                                 <td><a href="{{Route('admin.user.edit', $user->id)}}" class="btn btn-info btn-sm">Edit</a></td>
                                 <td>
                                 <form action="{{ route('admin.user.destroy', ['id' => $user->id])}}" method="post">

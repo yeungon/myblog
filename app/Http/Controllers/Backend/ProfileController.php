@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Article;
-use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\User;
 
-
-class UserController extends Controller
+class ProfileController extends Controller
 {
-       
-    // Guarding the access
-    public function __construct(){
+    
+     // Guarding the access
+     public function __construct(){
         $this->middleware('auth');
     }
     
@@ -24,71 +22,16 @@ class UserController extends Controller
         return Auth::user();
     }
 
-    public function index()
-    {
-        
-        $users = User::all();
-        return view('backend.user.user-index')->with(['users' => $users, 'currentuser' => $this->authorized()]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {   
-        $currentuser = Auth::user();        
-        return view('backend.user.user-create')->with(['currentuser' => $this->authorized()]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $currentuser = Auth::user();
-        View::share('currentuser', $currentuser); //Share the view 
-       
-        $validator = Validator::make($request->all(), [
-            'name'             => 'required|string|max:150',
-            'password'         => 'required|string|min:8|confirmed',            
-            'email'            => 'required|unique:users|email'            
-          
-        ]);
-       
-
-        if ($validator->fails()) {
-            return back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-                
-        $user               = new User();
-                
-        $user->name         = trim($request->name);
-        $user->password     = bcrypt($request->password);
-        $user->email        = $request->email;               
-        $user->is_admin     = $request->role;       
-
-        $user->save();
-        
-        return redirect()->route('admin.user.index')->with('status', "The new user <strong>$request->name</strong> is created!");
-         
-    }
-
-    /**
+       /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {        
-        View::share('currentuser', $this->authorized()); //Share the view  
+    {
+                
+        return view('backend.profile.profile-show')->with(['currentuser' => $this->authorized()]);
     }
 
     /**
@@ -99,10 +42,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-               
-        $user = User::findOrFail($id);      
-               
-        return view('backend.user.user-edit')->with(['user' => $user, 'currentuser' => $this->authorized()]);
+        return view('backend.profile.profile-edit')->with(['currentuser' => $this->authorized()]);
+
     }
 
     /**
@@ -166,7 +107,7 @@ class UserController extends Controller
 
         $passwordchangemessage = $passwordchange? "<strong>Password</strong> is also changed!": "";
         
-        return redirect()->route('admin.user.index')->with('status', "The user <strong>$request->name </strong> is now updated! $passwordchangemessage"); 
+        return redirect()->route('admin.profile.show', ['id' => $id])->with('status', "Your profile <strong>$request->name </strong> is now updated! $passwordchangemessage"); 
     }
 
     /**
@@ -181,10 +122,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('admin.user.index')->with('status', "User $user->name has been deleted! Noted that the category and articles written by the user are also deleted!");
+        return redirect()->route('login')->with('status', "Your profile is now  deleted! Sorry to know :-(");
     }
-
-    
 }
-
-

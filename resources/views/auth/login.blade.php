@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+
+    <!-- Flash message -->
+    @if (session('status'))
+       <div class="alert alert-danger">
+    {!!session('status') !!}
+    @endif
+        </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
