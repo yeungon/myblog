@@ -1,14 +1,15 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+            <div class="col-md-12">
+                
                     <div class="card-header">Dashboard admin</div>
 
                     <div class="card-body">
-                        I'm an Vue component. We are updating this component.
+                        Hi there, we are going to update the admin dashboard so that it works more reactively thanks to vuejs :-).
+                        
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -1713,6 +1713,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37062,17 +37063,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Dashboard admin")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an Vue component. We are updating this component.\n                "
-              )
-            ])
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Dashboard admin")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v(
+              "\n                    Hi there, we are going to update the admin dashboard so that it works more reactively thanks to vuejs :-).\n                    \n                "
+            )
           ])
         ])
       ])

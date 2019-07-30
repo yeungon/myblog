@@ -70,14 +70,21 @@
                         <div class="row align-items-center">
                           <label class="col-sm-2">Role:</label>
                           <div class="col-sm-10">
-                            <select name="role" id="select-role" class="form-control custom-select @error('role') is-invalid @enderror" value="{{ old('message') }}"  required>                            
-                                <option value="" disabled selected>Please select the role</option>                                
-                                <option value="1">Admin</option>
-                                <option value="0">User</option>                                
+
+                                @if($currentuser->is_admin)
+                                <select name="role" id="select-role" class="form-control custom-select @error('role') is-invalid @enderror" value="{{ old('message') }}"  required>
+                                  <option value="" disabled selected>Please select the role</option>
+                                  <option value="1">Admin</option>
+                                  <option value="0">User</option>
+                                  </select>
+                                @else
+                                  <p value="0" disabled>User (only admin can change this role)</strong></p>
+                                @endif
+                                                                
                                 @error('role')
                                     <div class="alert alert-danger">{{ $message }}</div>                                 
                                 @enderror                                                                                                
-                            </select>                            
+                                                        
                           </div>
                         </div>
                       </div>    
