@@ -93,24 +93,24 @@
                     </li>
 
                     <li class="nav-item">
-                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
+                      <a href="{{Route('admin.index')}}" class="nav-link {{ (request()->routeIs('admin.index')) ? 'active' : '' }}"><i class="fe fe-home"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                      <a href="{{Route('admin.user.index')}}" class="nav-link" ><i class="fe fe-users"></i> Users</a>                    
+                      <a href="{{Route('admin.user.index')}}" class="nav-link {{ (request()->routeIs('admin.user.index')) ? 'active' : '' }}" ><i class="fe fe-users"></i> Users</a>                    
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="{{Route('admin.category.index')}}" class="nav-link"><i class="fe fe-calendar"></i> Categories</a>                    
+                      <a href="{{Route('admin.category.index')}}" class="nav-link {{ (request()->routeIs('admin.category.index')) ? 'active' : '' }}"><i class="fe fe-calendar"></i> Categories</a>                    
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="{{Route('admin.article.index')}}" class="nav-link" ><i class="fe fe-file"></i> Articles</a>                   
+                      <a href="{{Route('admin.article.index')}}" class="nav-link {{ (request()->routeIs('admin.article.index')) ? 'active' : '' }}" ><i class="fe fe-file"></i> Articles</a>                   
                     </li>    
                     
                     <li class="nav-item dropdown">
-                      <a href="{{Route('admin.article.create')}}" class="nav-link"><i class="fe fe-send"></i> Write</a>                    
+                      <a href="{{Route('admin.article.create')}}" class="nav-link {{ (request()->routeIs('admin.article.create')) ? 'active' : '' }}"><i class="fe fe-send"></i> Write</a>                    
                     </li>                 
 
                     <li class="nav-item dropdown">
-                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
+                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link {{ (request()->routeIs('admin.profile.show')) ? 'active' : '' }}"><i class="fe fe-user"></i> Profile</a> 
                     </li>                                
                 @else
                   <li class="nav-item">
@@ -118,10 +118,10 @@
                     </li>
 
                     <li class="nav-item">
-                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home"></i> Dashboard</a>
+                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home {{ (request()->routeIs('admin.index')) ? 'active' : '' }}"></i> Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link"><i class="fe fe-user"></i> Profile</a> 
+                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link {{ (request()->routeIs('profile.show')) ? 'active' : '' }}"><i class="fe fe-user"></i> Profile</a> 
                     </li>
 
                 @endif                                                 
