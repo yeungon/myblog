@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
-{   
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -16,22 +16,22 @@ class Article extends Model
     ];
 
     /**
-     * Relationship with user one->many
+     * Relationship with user one->many.
      *
      * @var function
      */
-    public function getUser(){
+    public function getUser()
+    {
         return $this->belongsTo('App\User', 'author', 'id');
-   }
-
-   /**
-     * Relationship with category one->many
-     *
-     * @var function
-     */
-
-   public function getCategory (){
-        return $this->belongsTo('App\Category', 'category', 'id');
     }
 
+    /**
+     * Relationship with category one->many.
+     *
+     * @var function
+     */
+    public function getCategory()
+    {
+        return $this->belongsTo('App\Category', 'category', 'id');
+    }
 }

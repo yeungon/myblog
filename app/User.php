@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -37,24 +36,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-      /**
-     * Relationship with category one->many
+    /**
+     * Relationship with category one->many.
      *
      * @var function
      */
-
-    public function getCategory (){
+    public function getCategory()
+    {
         return $this->hasMany('App\Category', 'author', 'id');
     }
-        
-      /**
-     * Relationship with article one->many
+
+    /**
+     * Relationship with article one->many.
      *
      * @var function
      */
-
-    public function getArticle (){
+    public function getArticle()
+    {
         return $this->hasMany('App\Article', 'author', 'id');
     }
-
 }

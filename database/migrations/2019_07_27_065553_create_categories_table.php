@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('author'); //Create a foreign key column            
+            $table->unsignedBigInteger('author'); //Create a foreign key column
             $table->foreign('author')->references('id')->on('users')->onDelete('cascade'); //"Assign" the foreign key and 'on delete'
             $table->timestamps();
         });

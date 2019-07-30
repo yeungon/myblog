@@ -19,22 +19,21 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logoutsystem');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //The Front-End routes
-Route::get('/', 'Frontend\HomeController@index')->name("homepage");
+Route::get('/', 'Frontend\HomeController@index')->name('homepage');
 Route::get('/about', 'Frontend\HomeController@about')->name('about');
 Route::get('/contact', 'Frontend\HomeController@contact')->name('contact');
-Route::get('/article', 'Frontend\HomeController@index')->name("homepagearticle");
+Route::get('/article', 'Frontend\HomeController@index')->name('homepagearticle');
 Route::get('/article/{id}.secured', 'Frontend\HomeController@article')->name('article')->where(['id' => '[0-9]+']);
 
 // Display blogpost/article according to user and category
-Route::get('/user-article/{userid}.secured', 'Frontend\HomeArticleListing@byUser')->name("home.article.user");
-Route::get('/category-article/{categoryid}.secured', 'Frontend\HomeArticleListing@byCategory')->name("home.article.category");
-
+Route::get('/user-article/{userid}.secured', 'Frontend\HomeArticleListing@byUser')->name('home.article.user');
+Route::get('/category-article/{categoryid}.secured', 'Frontend\HomeArticleListing@byCategory')->name('home.article.category');
 
 // The Back-end ruotes
 Route::prefix('admin')->group(function () {
     Route::get('/', 'Backend\AdminController@index')->name('admin.index');
-    
-    //User 
+
+    //User
     Route::get('user', 'Backend\UserController@index')->name('admin.user.index');
     Route::get('user/create', 'Backend\UserController@create')->name('admin.user.create');
     Route::post('user/create', 'Backend\UserController@store')->name('admin.user.store');
@@ -60,6 +59,4 @@ Route::prefix('admin')->group(function () {
     Route::get('article/edit/{id}', 'Backend\ArticleController@edit')->name('admin.article.edit');
     Route::put('article/edit/{id}', 'Backend\ArticleController@update')->name('admin.article.update');
     Route::delete('article/delete/{id}', 'Backend\ArticleController@destroy')->name('admin.article.destroy');
-
-    
 });

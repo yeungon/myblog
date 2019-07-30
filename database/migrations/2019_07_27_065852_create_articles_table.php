@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArticlesTable extends Migration
 {
@@ -20,10 +20,10 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->nullable();
             $table->text('introduction');
             $table->longText('content');
-            $table->unsignedBigInteger('author'); //Create a foreign key column      
+            $table->unsignedBigInteger('author'); //Create a foreign key column
             $table->foreign('author')->references('id')->on('users')->onDelete('cascade'); //Foreign key and 'on delete'
-            $table->unsignedBigInteger('category');//Create a foreign key column      
-            $table->foreign('category')->references('id')->on('categories')->onDelete('cascade'); //Foreign key and 'on delete'            
+            $table->unsignedBigInteger('category'); //Create a foreign key column
+            $table->foreign('category')->references('id')->on('categories')->onDelete('cascade'); //Foreign key and 'on delete'
             $table->timestamps();
         });
     }
