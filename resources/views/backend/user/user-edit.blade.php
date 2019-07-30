@@ -33,7 +33,7 @@
                         <div class="row align-items-center">
                           <label class="col-sm-2">Email:</label>
                           <div class="col-sm-10">
-                            <input type="text" name = "email" class="form-control @error('email') is-invalid @enderror" value="" placeholder="Leave it empty if you want to keep the current email: {{$user->email}}">
+                            <input type="text" name = "email" class="form-control @error('email') is-invalid @enderror" value="{{$user->email}}" required>
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

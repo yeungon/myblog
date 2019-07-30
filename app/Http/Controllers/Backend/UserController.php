@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
@@ -113,38 +114,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $case = 0;
+        $passwordchange = false;
 
-        if($request->email === null && $request->password === null){
+        if($request->password === null){
 
             $validator = Validator::make($request->all(), [
-                'name'             => 'required|string|max:150',                                            
+                'name'             => 'required|string|max:150',
+                'email'            => [
+                    'required',
+                    // This rule will ignore the current email address when checking the uniqueness.
+                    Rule::unique('users')->ignore($id), 
+                    ],                                              
                
             ]);
-
-            $case = 1;
+           
     
-        }elseif($request->password === null || $request->password_confirmation === null){
+        }else{
 
             $validator = Validator::make($request->all(), [
                 'name'             => 'required|string|max:150',                            
-                'email'            => 'email|unique:users'  
-               
+                'password'         => 'required|confirmed|string|min:8',
+                'email'            => [
+                                    'required',                                    
+                                    Rule::unique('users')->ignore($id), 
+                                    ],  
             ]);
 
-            $case = 2;
+            $passwordchange = true;
     
-        }elseif($request->email === null){
-
-            $validator = Validator::make($request->all(), [
-                'name'             => 'required|string|max:150',                            
-                'password'         => 'string|min:8|confirmed',  
-               
-            ]);
-
-            $case = 3;    
-
         }
    
         if ($validator->fails()) {
@@ -154,24 +151,22 @@ class UserController extends Controller
         }
    
         $user = User::find($id);
-        
-        $user->name = $request->name;
-
+        $user->name = trim($request->name);
         $user->is_admin      = $request->role;
+        $user->email         = $request->email;
+
+        if($passwordchange === true){
         
-        if($case === 2){
-
-            $user->email         = $request->email;
-
-        }elseif($case ===3){
-            
             $user->password      = bcrypt($request->password);
 
         }
+        
 
         $user->save();
+
+        $passwordchangemessage = $passwordchange? "<strong>Password</storng> is also changed!": "";
         
-        return redirect()->route('admin.user.index')->with('status', "The user <strong>$request->name </strong> is now updated!"); 
+        return redirect()->route('admin.user.index')->with('status', "The user <strong>$request->name </strong> is now updated! $passwordchangemessage"); 
     }
 
     /**
