@@ -118,10 +118,10 @@
                     </li>
 
                     <li class="nav-item">
-                      <a href="{{Route('admin.index')}}" class="nav-link active"><i class="fe fe-home {{ (request()->routeIs('admin.index')) ? 'active' : '' }}"></i> Dashboard</a>
+                      <a href="{{Route('admin.index')}}" class="nav-link {{ (request()->routeIs('admin.index')) ? 'active' : '' }}"><i class="fe fe-home"></i> Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link {{ (request()->routeIs('profile.show')) ? 'active' : '' }}"><i class="fe fe-user"></i> Profile</a> 
+                    <a href="{{Route('admin.profile.show', ['id' => $currentuser->id])}}" class="nav-link {{ (request()->routeIs('admin.profile.show')) ? 'active' : '' }}"><i class="fe fe-user"></i> Profile</a> 
                     </li>
 
                 @endif                                                 
