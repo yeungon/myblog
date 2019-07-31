@@ -9,12 +9,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use App\Repositories\Contracts\ArticleRepositoryInterface;
+
 
 class ArticleController extends Controller
 {
-    
+    protected $articleRepository;
     // Guarding the access
-    public function __construct(){
+    public function __construct(ArticleRepositoryInterface $articleRepository){
+
+        $this->articleRepository = $articleRepository;
+
         $this->middleware('auth');
         
     }
@@ -26,7 +31,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = $this->articleRepository->all();
 
         $currentuser = Auth::user();
 
@@ -79,7 +84,7 @@ class ArticleController extends Controller
         if($request->is_publish === null){
 
             $request->is_publish =  0;
-            
+
         }else{
 
             $request->is_publish =  1;
@@ -111,7 +116,7 @@ class ArticleController extends Controller
 
         View::share('currentuser', $currentuser); //Share the view  
 
-        $article = Article::findOrFail($id);      
+        $article =  $this->articleRepository->find($id);      
 
         return view('backend.article.article-show')->with(['article' => $article]);
     }
@@ -128,7 +133,7 @@ class ArticleController extends Controller
 
         View::share('currentuser', $currentuser); //Share the view  
 
-        $article = Article::findOrFail($id);      
+        $article = $this->articleRepository->find($id);      
 
         $categories = Category::all();        
         
