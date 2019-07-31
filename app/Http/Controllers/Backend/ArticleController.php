@@ -29,6 +29,7 @@ class ArticleController extends Controller
         $articles = Article::all();
 
         $currentuser = Auth::user();
+
         View::share('currentuser', $currentuser); //Share the view  
 
         return view('backend.article.article-index')->with(['articles' => $articles]);
@@ -42,9 +43,11 @@ class ArticleController extends Controller
     public function create()
     {   
         $currentuser = Auth::user();
+
         View::share('currentuser', $currentuser); //Share the view  
 
-        $categories = Category::all();        
+        $categories = Category::all();      
+
         return view('backend.article.article-create')->with(['categories' => $categories]);
     }
 
@@ -57,6 +60,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {   
         $currentuser = Auth::user();
+
         View::share('currentuser', $currentuser); //Share the view  
 
         $validator = Validator::make($request->all(), [
@@ -67,13 +71,17 @@ class ArticleController extends Controller
         ]);
         
         if ($validator->fails()) {
+
             return back()->withInput()->withErrors($validator);
                         
         }
 
         if($request->is_publish === null){
+
             $request->is_publish =  0;
+            
         }else{
+
             $request->is_publish =  1;
         }
         
@@ -100,6 +108,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $currentuser = Auth::user();
+
         View::share('currentuser', $currentuser); //Share the view  
 
         $article = Article::findOrFail($id);      
@@ -116,6 +125,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $currentuser = Auth::user();
+
         View::share('currentuser', $currentuser); //Share the view  
 
         $article = Article::findOrFail($id);      
@@ -178,7 +188,6 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-
 
         $article = Article::find($id);
 

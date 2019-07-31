@@ -22,8 +22,7 @@ class AdminController extends Controller
         $categories = Category::all();
         $articles = Article::all();
         $currentuser = Auth::user();
-
-        View::share('currentuser', $currentuser); //Share the view
+        
         return view('backend.index')->with(['currentuser'=> $currentuser, 'users' => $users, 'categories' => $categories, 'articles' => $articles]);
     }
 }
