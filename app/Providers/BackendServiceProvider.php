@@ -18,6 +18,11 @@ class BackendServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\ArticleRepositoryInterface',
             'App\Repositories\Eloquents\ArticleRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\CategoryRepositoryInterface',
+            'App\Repositories\Eloquents\CategoryRepository'
+        );
     }
 
     /**

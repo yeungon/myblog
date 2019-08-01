@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -11,9 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    
+    protected $categoryRepository;
     // Guarding the access
-      public function __construct(){
+      public function __construct(CategoryRepositoryInterface $categoryRepository){
+        $this->categoryRepository = $categoryRepository;
         $this->middleware('auth');
     }
 
@@ -27,8 +29,8 @@ class CategoryController extends Controller
     {
         $currentuser = Auth::user();
         View::share('currentuser', $currentuser); //Share the view  
-
-        $categories = Category::all();
+        
+        $categories = $this->categoryRepository->all();
         return view('backend.category.category-index')->with('categories', $categories);
     }
 
@@ -98,9 +100,10 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $currentuser = Auth::user();
+        
         View::share('currentuser', $currentuser); //Share the view
         
-        $category = Category::findOrFail($id);      
+        $category = $this->categoryRepository->find($id);
                
         return view('backend.category.category-edit')->with(['category' => $category]);
     }
@@ -127,8 +130,8 @@ class CategoryController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-   
-        $category = Category::find($id);        
+           
+        $category = $this->categoryRepository->find($id);        
         $category->name         = $request->name;
         $category->author        = Auth::id();
 
@@ -145,7 +148,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->find($id);
 
         $category->delete();
 
