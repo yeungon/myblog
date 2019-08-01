@@ -26,7 +26,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Registerd on</th>
+                                <th scope="col">Registered on</th>
                                 <th scope="col">Article written</th>                                
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
