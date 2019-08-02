@@ -69,7 +69,7 @@
                           </div>
                         </div>
                       </div>
-                      <textarea id = "contentbody" rows="20" class="form-control @error('content') is-invalid @enderror" name = "content" value="{{ old('content') }}"  required></textarea>
+                      <textarea id = "editor" rows="20" class="form-control @error('content') is-invalid @enderror" name = "content" value="{{ old('content') }}"  required></textarea>
                                 @error('content')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

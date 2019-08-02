@@ -14,6 +14,6 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function find($id)
     {
-        return Article::find($id);
+        return Article::findOrFail($id);
     }
 }

@@ -10,13 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use App\Repositories\Contracts\UserRepositoryInterface;
 
 
 class UserController extends Controller
 {
-       
+    protected $userRepository;   
     // Guarding the access
-    public function __construct(){
+    public function __construct(UserRepositoryInterface $userRepository){
+        
+        $this->userRepository = $userRepository;
+        
         $this->middleware('auth');
     }
     
@@ -27,7 +31,7 @@ class UserController extends Controller
     public function index()
     {
         
-        $users = User::all();
+        $users = $this->userRepository->all();
         return view('backend.user.user-index')->with(['users' => $users, 'currentuser' => $this->authorized()]);
     }
 
@@ -100,7 +104,7 @@ class UserController extends Controller
     public function edit($id)
     {
                
-        $user = User::findOrFail($id);      
+        $user = $this->userRepository->find($id);
                
         return view('backend.user.user-edit')->with(['user' => $user, 'currentuser' => $this->authorized()]);
     }
@@ -150,7 +154,7 @@ class UserController extends Controller
                         ->withInput();
         }
    
-        $user = User::find($id);
+        $user = $this->userRepository->find($id);
         $user->name = trim($request->name);
         $user->is_admin      = $request->role;
         $user->email         = $request->email;
@@ -177,7 +181,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = $this->userRepository->find($id);
 
         $user->delete();
 

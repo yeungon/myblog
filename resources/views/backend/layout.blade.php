@@ -184,16 +184,7 @@
       </footer>
     </div>
   </div>
-
-  <script type="text/javascript" src="{{ asset('js/tinymce.min.js') }}" >
   
-  tinymce.init({
-        editor_selector : "mceEditor",
-        selector: '#contentbody'
-      });
-      
-  </script>
-
   </body>
   
 </html>
