@@ -6,12 +6,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Article;
 use App\User;
 use App\Category;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\ArticleRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 
 
 
 class HomeController extends Controller
 {
   
+    protected $userRepository, $categoryRepository, $articleRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository, ArticleRepositoryInterface $articleRepository, CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->userRepository       = $userRepository;
+        $this->categoryRepository   = $categoryRepository;
+        $this->articleRepository    = $articleRepository;
+        
+    }
     protected function getCurrentUser(){
         
         return Auth::user();
@@ -21,20 +33,19 @@ class HomeController extends Controller
     public function index(){
         
         
-        $articles = Article::where('is_publish', 1)->orderBy('created_at', 'desc')->paginate(2);
-        
-                
+        $articles = $this->articleRepository->getArticlePublishedOrderdbyPaginate(2);
+                        
         return view('frontend.index')->with(['articles' => $articles, 'user' => $this->getCurrentUser()]);
     }
 
     // Displaying a particular article, there are two parameters: name and id
     public function article($id){
         
-        $article = Article::findOrFail($id);
+        $article    = $this->articleRepository->find($id);
 
-        $author = Article::findOrFail($id)->getUser;
+        $author     = $article->getUser;
 
-        $category = Article::findOrFail($id)->getCategory;
+        $category   = $article->getCategory;
                         
         return view('frontend.article')->with(['id'=> $id, 'author'=> $author, 'category' =>$category, 'article' => $article, 'user' => $this->getCurrentUser()]);
     }
@@ -42,11 +53,11 @@ class HomeController extends Controller
     // Displaying the about
     public function about(){
 
-        $authors = User::all();
-
-        $articles = Article::all();
+        $authors = $this->userRepository->all();
         
-        $categories = Category::all();
+        $articles = $this->articleRepository->all();
+        
+        $categories = $this->categoryRepository->all();
                         
         return view('frontend.about')->with(['authors' => $authors, 'articles' => $articles, 'categories' => $categories, 'user' => $this->getCurrentUser()]);
     }
