@@ -3,14 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Article;
-use App\User;
-use App\Category;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\ArticleRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
-
-
 
 class HomeController extends Controller
 {

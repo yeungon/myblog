@@ -20,4 +20,12 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::where('is_publish', 1)->orderBy($orderby, $sorted)->paginate($page);
 
     }
+
+    public function getArticlebyAuthor($author){
+        return Article::where('author',  $author)->get();
+    }
+
+    public function getArticlebyCategory($category){
+        return Article::where('category',  $category)->get();
+    }
 }
