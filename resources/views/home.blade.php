@@ -18,8 +18,9 @@
 
                     Hi {{ Auth::user()->name }}, you are logged in!
                     
-                    <home-component :username = {{ Auth::user()->name }}></home-component>
-                    
+                    <home-component :initialusername = "{{Auth::user()}}"></home-component>
+
+                                        
                 </div>
             </div>
         </div>

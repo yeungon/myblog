@@ -1747,14 +1747,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['initialusername'],
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Hi ".concat(this.initialusername.name, ". Welcome back!"));
   },
   data: function data() {
     return {
-      name: "Vuong"
+      // As object and array are passed by REFERENCE in Js, the proper way to pass props to data by either shallow or deep copy (clone) https://stackoverflow.com/questions/40408096/whats-the-correct-way-to-pass-props-as-initial-data-in-vue-js-2
+      //Shalow copy https://github.com/vuejs/vue/issues/158 or https://laracasts.com/discuss/channels/vue/vuejs-saving-data or Lodash
+      // name: Vue.util.extend({},this.initialusername),
+      name: _.cloneDeep(this.initialusername)
     };
+  },
+  methods: {
+    getName: function getName() {
+      return this.name.name;
+    },
+    isAdmin: function isAdmin() {
+      return this.name.is_admin ? "You can manage the blog." : "You can only edit your profile!";
+    }
   }
 });
 
@@ -37099,32 +37114,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("Welcoming")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    Welcome to the new blog. We are designing a new dashboard with much better experience at "
-              ),
-              _c("a", { attrs: { href: "/admin" } }, [_vm._v("here! ")]),
-              _vm._v(". \n                ")
-            ])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("Welcoming")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v(
+              "\n                    Hi " +
+                _vm._s(_vm.initialusername.name) +
+                ". "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                    Welcome " +
+                _vm._s(_vm.getName()) +
+                " to the new blog. "
+            ),
+            _c("br"),
+            _vm._v("\n                    " + _vm._s(_vm.isAdmin())),
+            _c("br"),
+            _vm._v(
+              "\n                    We are designing a new dashboard with much better experience at "
+            ),
+            _c("a", { attrs: { href: "/admin" } }, [_vm._v("here! ")]),
+            _vm._v(". \n                ")
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
