@@ -50,7 +50,7 @@ class HomeController extends Controller
 
         $authors = $this->userRepository->all();
         
-        $articles = $this->articleRepository->all();
+        $articles = $this->articleRepository->allPublished();
         
         $categories = $this->categoryRepository->all();
                         

@@ -11,6 +11,11 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::all();
     }
 
+    public function allPublished(){
+        return Article::where(['is_publish' => 1])->get();
+        
+    }
+
     public function find($id){
         return Article::findOrFail($id);
     }
@@ -22,10 +27,11 @@ class ArticleRepository implements ArticleRepositoryInterface
     }
 
     public function getArticlebyAuthor($author){
-        return Article::where('author',  $author)->get();
+        return Article::where(['author' => $author, 'is_publish' => 1])->get();
+        
     }
 
     public function getArticlebyCategory($category){
-        return Article::where('category',  $category)->get();
+        return Article::where(['category' => $category, 'is_publish' => 1])->get();
     }
 }
