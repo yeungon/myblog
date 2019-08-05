@@ -38,6 +38,12 @@ class HomeController extends Controller
         
         $article    = $this->articleRepository->find($id);
 
+        // Guarding the draft articles
+        if($article->is_publish === 0){
+
+                return redirect()->route('homepage');
+        }
+
         $author     = $article->getUser;
 
         $category   = $article->getCategory;
